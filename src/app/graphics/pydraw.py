@@ -53,3 +53,11 @@ class PyDraw(Draw):
             width
         )
         return self
+
+    def text(self, position: Point, text: str, size: int = 10) -> 'Draw':
+        font = pygame.font.Font(pygame.font.get_default_font(), size)
+        self.__surface.blit(
+            font.render(text, True, self.__color),
+            dest=tuple(position)
+        )
+        return self

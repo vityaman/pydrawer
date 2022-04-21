@@ -4,9 +4,12 @@ import pygame
 
 from .control.pymouse import PyMouse
 from .control.pykeyboard import PyKeyboard
+from .control.mouse import Mouse
+from .control.keyboard import Keyboard
 from .control.event import Event
 from .graphics.figure.value.size import Size
 from .graphics.pysurface import PySurface
+from .graphics.surface import Surface
 from .app import App
 
 
@@ -36,6 +39,24 @@ class PyApp(App, ABC):
             self.on_draw(self.__window)
             pygame.display.flip()
         self.on_stop()
+
+    def on_start(self):
+        pass
+
+    def on_event(self, event: Event):
+        pass
+
+    def on_control(self, mouse: Mouse, keyboard: Keyboard):
+        pass
+
+    def on_update(self):
+        pass
+
+    def on_draw(self, surface: Surface):
+        pass
+
+    def on_stop(self):
+        pass
 
     def stop(self):
         self.__running = False

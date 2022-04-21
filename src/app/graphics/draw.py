@@ -27,3 +27,7 @@ class Draw(ABC):
     @abstractmethod
     def circle(self, circle: Circle, width: int = 1) -> 'Draw':
         raise NotImplementedError()
+
+    @abstractmethod
+    def text(self, position: Point, text: str) -> 'Draw':
+        raise NotImplementedError()
