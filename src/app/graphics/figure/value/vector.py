@@ -18,5 +18,12 @@ class Vector:
     def __sub__(self, other: 'Vector') -> 'Vector':
         return Vector(self.x - other.x, self.y - other.y)
 
+    def __mul__(self, scalar: float) -> 'Vector':
+        return Vector(scalar * self.x, scalar * self.y)
+
+    def __iter__(self):
+        yield self.x
+        yield self.y
+
     def __repr__(self) -> str:
         return f'({self.x}, {self.y})'

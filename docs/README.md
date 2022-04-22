@@ -1,3 +1,19 @@
+# PyDrawer
+
+
+## The simplest gui
+Created to simplify the creation of gui applications using python.
+The simplest functionality is provided for fast lightweigth apps.
+It can be usefull if you want to quick throw some idea of yours on the draft.
+
+
+## Requirements
+- ```pip install pygame```
+
+
+## Example
+
+```python
 from app.graphics.figure.value import Size, Color, Point, Vector
 from app.graphics.figure import Circle
 from app.graphics import Surface, Transformed
@@ -51,7 +67,7 @@ class HelloWorld(PyApp):
         ).lines(
             points = (
                 Point(x, x ** 2) for x in map(
-                    lambda x: x / 1000, (n for n in range(-1000, 3000))
+                    lambda x: x / 1e4, (n for n in range(-1e4, 3e4))
                 )
             )
         ).text(
@@ -63,3 +79,7 @@ class HelloWorld(PyApp):
 if __name__ == '__main__':
     app = HelloWorld()
     app.run()
+
+```
+
+![preview](example-preview.jpg)

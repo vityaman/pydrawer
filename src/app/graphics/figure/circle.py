@@ -1,4 +1,4 @@
-from .value.point import Point
+from .value import Point
 
 
 class Circle:

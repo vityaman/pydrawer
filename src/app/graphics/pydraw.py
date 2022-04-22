@@ -1,12 +1,10 @@
-from typing import Sequence
+from typing import List
 
 import pygame
 
+from .figure.value import Color, Point
+from .figure import Circle, Rectangle
 from .draw import Draw
-from .figure.value.color import Color
-from .figure.circle import Circle
-from .figure.value.point import Point
-from .figure.rectangle import Rectangle
 
 
 class PyDraw(Draw):
@@ -19,9 +17,8 @@ class PyDraw(Draw):
     def color(self, color: Color) -> 'PyDraw':
         return PyDraw(self.__surface, color)
 
-    def rect(self, rectangle: Rectangle, width: int = 1) -> 'PyDraw':
-        pygame.draw.rect(
-            self.__surface, self.__color,
+    def rect(self, rectangle: Rectangle, width: int = 0) -> 'PyDraw':
+        pygame.draw.rect(self.__surface, self.__color,
             pygame.Rect(
                 rectangle.left, rectangle.top,
                 rectangle.width, rectangle.bottom
@@ -30,25 +27,29 @@ class PyDraw(Draw):
         )
         return self
 
-    def polygon(self, points: Sequence[Point], width: int = 1) -> 'PyDraw':
-        pygame.draw.polygon(
-            self.__surface, self.__color,
-            points,
+    def polygon(self, points: List[Point], width: int = 0) -> 'PyDraw':
+        pygame.draw.polygon(self.__surface, self.__color,
+            [(p.x, p.y) for p in points],
             width
         )
         return self
 
     def line(self, start: Point, end: Point, width: int = 1) -> 'PyDraw':
-        pygame.draw.line(
-            self.__surface, self.__color,
+        pygame.draw.line(self.__surface, self.__color,
             tuple(start), tuple(end),
             width
         )
         return self
 
-    def circle(self, circle: Circle, width: int = 1) -> 'PyDraw':
-        pygame.draw.circle(
-            self.__surface, self.__color,
+    def lines(self, points: List[Point], width: int = 1) -> 'PyDraw':
+        pygame.draw.lines(self.__surface, self.__color, False,
+            [(p.x, p.y) for p in points],
+            width
+        )
+        return self
+
+    def circle(self, circle: Circle, width: int = 0) -> 'PyDraw':
+        pygame.draw.circle(self.__surface, self.__color,
             tuple(circle.center), circle.radius,
             width
         )

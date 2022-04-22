@@ -1,6 +1,6 @@
-from .figure import *
-
 from .draw import Draw
+from .transformed import Transformed
+
 from .surface import Surface
 
 from .pydraw import PyDraw
