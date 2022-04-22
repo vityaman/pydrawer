@@ -11,12 +11,17 @@ class Transformed(Draw):
         self.__transformation = transformation
 
     def color(self, color: Color) -> 'Transformed':
-        return Transformed(self.__origin.color(color), self.__center)
+        return Transformed(self.__origin.color(color), self.__transformation)
 
     def rect(self, rectangle: Rectangle, width: int = 0) -> 'Transformed':
+        left_top = self.__transformed(Point(rectangle.left, rectangle.top))
+        right_bottom = self.__transformed(Point(rectangle.right, rectangle.bottom))
         self.__origin.rect(Rectangle(
-                *self.__transformed(Point(rectangle.left, rectangle.right)),
-                rectangle.width, rectangle.height),
+                left = left_top.x,
+                right = right_bottom.x,
+                bottom = right_bottom.y,
+                top = left_top.y
+            ),
             width)
         return self
 

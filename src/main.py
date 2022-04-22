@@ -1,5 +1,5 @@
 from app.graphics.figure.value import Size, Color, Point, Vector
-from app.graphics.figure import Circle
+from app.graphics.figure import Circle, Rectangle
 from app.graphics import Surface, Transformed
 from app.control import Event
 from app import PyApp
@@ -57,6 +57,9 @@ class HelloWorld(PyApp):
         ).text(
             position = Point(2, 2),
             text = "y = x ^ 2, x in [-1, 3]"
+        ).rect(
+            rectangle = Rectangle(-2, 2, -2, 2),
+            width = 1
         )
 
 

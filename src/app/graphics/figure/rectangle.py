@@ -1,10 +1,10 @@
 
 class Rectangle:
-    def __init__(self, left: int, top: int, width: int, height: int):
-        self.__left = left
-        self.__top = top
-        self.__width = width
-        self.__height = height
+    def __init__(self, left: int, right: int, bottom: int, top: int):
+        self.__left = min(left, right)
+        self.__right = max(left, right)
+        self.__bottom = min(bottom, top)
+        self.__top = max(bottom, top)
 
     @property
     def left(self) -> int:
@@ -12,7 +12,7 @@ class Rectangle:
 
     @property
     def right(self) -> int:
-        return self.__left + self.__width
+        return self.__right
 
     @property
     def top(self) -> int:
@@ -20,12 +20,12 @@ class Rectangle:
 
     @property
     def bottom(self) -> int:
-        return self.__top + self.__height
+        return self.__bottom
 
     @property
     def height(self) -> int:
-        return self.__height
+        return self.top - self.bottom
 
     @property
     def width(self) -> int:
-        return self.__width
+        return self.right - self.left

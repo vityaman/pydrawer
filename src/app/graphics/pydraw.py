@@ -20,8 +20,8 @@ class PyDraw(Draw):
     def rect(self, rectangle: Rectangle, width: int = 0) -> 'PyDraw':
         pygame.draw.rect(self.__surface, self.__color,
             pygame.Rect(
-                rectangle.left, rectangle.top,
-                rectangle.width, rectangle.bottom
+                rectangle.left, rectangle.bottom,
+                rectangle.width, rectangle.height
             ),
             width
         )
