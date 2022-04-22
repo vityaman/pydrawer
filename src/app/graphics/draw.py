@@ -32,5 +32,5 @@ class Draw(ABC):
         raise NotImplementedError()
 
     @abstractmethod
-    def text(self, position: Point, text: str) -> 'Draw':
+    def text(self, position: Point, text: str, size: int = 10) -> 'Draw':
         raise NotImplementedError()
