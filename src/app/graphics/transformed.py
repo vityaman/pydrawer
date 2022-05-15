@@ -45,7 +45,7 @@ class Transformed(Draw):
         return self
 
     def text(self, position: Point, text: str, size: int = 10) -> 'Transformed':
-        self.__origin.text(self.__transformed(position), text)
+        self.__origin.text(self.__transformed(position), text, size)
         return self
 
     def __transformed(self, point: Point) -> Point:

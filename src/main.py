@@ -1,4 +1,6 @@
+from collections import deque
 from app.graphics.figure.value import Size, Color, Point, Vector
+from app.graphics.figure.value.transformation import rotation
 from app.graphics.figure import Circle, Rectangle
 from app.graphics import Surface, Transformed
 from app.control import Event
@@ -14,14 +16,41 @@ class HelloWorld(PyApp):
             window_size=Size(self.W, self.H),
             fps=60
         )
+        self.colors = [
+            Color(255, 0, 0),
+            Color(50, 200, 50),
+            Color(0, 0, 255),
+        ]
+        self.arrows = [
+            Vector(4, 0), 
+            Vector(3, 0),
+            Vector(2, 0)
+        ]
+        self.rotations = [
+            rotation(-0.2),
+            rotation(0.05),
+            rotation(0.3)
+        ]
+        self.points = [
+            deque([Point(0, 0), Point(0, 0)]),
+            deque([Point(0, 0), Point(0, 0)]),
+            deque([Point(0, 0), Point(0, 0)])
+        ]
 
     def on_event(self, event: Event):
         if event.type == Event.Type.QUIT:
             self.stop()
 
+    def on_update(self):
+        for i in range(len(self.points)):
+            self.arrows[i] = self.rotations[i].apply(self.arrows[i])
+            self.points[i].appendleft(self.arrows[i])
+            if (len(self.points[i]) > 10):
+                self.points[i].pop()
+
     def on_draw(self, surface: Surface):
         surface.fill(Color(230, 230, 80))
-        Transformed.scaled(
+        draw = Transformed.scaled(
             Transformed.xoy(
                 origin = surface.draw(),
                 center = Point(
@@ -61,6 +90,17 @@ class HelloWorld(PyApp):
             rectangle = Rectangle(-2, 2, -2, 2),
             width = 1
         )
+        for i in range(len(self.arrows)):
+            draw.color(
+                    self.colors[i]
+                ).line(
+                    start = Vector(0, 0),
+                    end = self.arrows[i],
+                    width = 2
+                ).lines(
+                    points = self.points[i],
+                    width = 2
+                )
 
 
 if __name__ == '__main__':
